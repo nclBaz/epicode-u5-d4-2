@@ -10,6 +10,7 @@ import {
 } from "./errorHandlers.js"
 import { pgConnect, syncModels } from "./db.js"
 import usersRouter from "./api/users/index.js"
+import blogsRouter from "./api/blogs/index.js"
 
 const server = express()
 const port = process.env.PORT || 3001
@@ -20,6 +21,7 @@ server.use(express.json())
 
 // ********************************** ENDPOINTS ******************************
 server.use("/users", usersRouter)
+server.use("/blogs", blogsRouter)
 
 // ******************************** ERROR HANDLERS ***************************
 server.use(badRequestErrorHandler)
