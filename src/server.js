@@ -11,6 +11,7 @@ import {
 import { pgConnect, syncModels } from "./db.js"
 import usersRouter from "./api/users/index.js"
 import blogsRouter from "./api/blogs/index.js"
+import categoriesRouter from "./api/categories/index.js"
 
 const server = express()
 const port = process.env.PORT || 3001
@@ -22,6 +23,7 @@ server.use(express.json())
 // ********************************** ENDPOINTS ******************************
 server.use("/users", usersRouter)
 server.use("/blogs", blogsRouter)
+server.use("/categories", categoriesRouter)
 
 // ******************************** ERROR HANDLERS ***************************
 server.use(badRequestErrorHandler)
