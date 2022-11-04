@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize"
 import sequelize from "../../db.js"
 import UsersModel from "../users/model.js"
+import CategoriesModel from "../categories/model.js"
+import BlogsCategoriesModel from "./blogsCategoriesModel.js"
 
 const BlogsModel = sequelize.define("blog", {
   blogsId: {
@@ -21,5 +23,21 @@ const BlogsModel = sequelize.define("blog", {
 // 1 to many relationship
 UsersModel.hasMany(BlogsModel)
 BlogsModel.belongsTo(UsersModel)
+
+// many to many relationship
+BlogsModel.belongsToMany(CategoriesModel, {
+  through: BlogsCategoriesModel,
+  foreignKey: {
+    name: "blogId",
+    allowNull: false,
+  },
+})
+CategoriesModel.belongsToMany(BlogsModel, {
+  through: BlogsCategoriesModel,
+  foreignKey: {
+    name: "categoryId",
+    allowNull: false,
+  },
+})
 
 export default BlogsModel
